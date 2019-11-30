@@ -10,7 +10,7 @@ import android.support.annotation.Nullable;
  * @Date 2019-11-13 23:01
  * @Version 1.0
  */
-public interface IActivity<P extends IPresenter> {
+public interface IActivity {
 
     /**
      * 初始化布局
@@ -25,9 +25,6 @@ public interface IActivity<P extends IPresenter> {
      */
     void initData(@Nullable Bundle savedInstanceState);
 
-    /**
-     * 绑定Presenter
-     * @return
-     */
-    P setPresenter();
+    void activityComponent();
+
 }

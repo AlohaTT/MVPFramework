@@ -7,7 +7,7 @@ package com.alohatt.library.base;
  * @Date 2019-11-13 23:33
  * @Version 1.0
  */
-public interface IFragment<P extends IPresenter> {
+public interface IFragment {
 
     /**
      * 初始化布局
@@ -21,9 +21,5 @@ public interface IFragment<P extends IPresenter> {
      */
     void initData();
 
-    /**
-     * 绑定Presenter
-     * @return
-     */
-    P setPresenter();
+    void fragmentComponent();
 }

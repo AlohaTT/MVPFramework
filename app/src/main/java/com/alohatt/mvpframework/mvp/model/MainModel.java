@@ -3,6 +3,8 @@ package com.alohatt.mvpframework.mvp.model;
 import com.alohatt.library.mvp.BaseModel;
 import com.alohatt.mvpframework.mvp.contract.MainContract;
 
+import javax.inject.Inject;
+
 /**
  * @ClassName MainModel
  * @Description TODO
@@ -12,4 +14,17 @@ import com.alohatt.mvpframework.mvp.contract.MainContract;
  */
 public class MainModel extends BaseModel implements MainContract.Model {
 
+    @Inject
+    public MainModel() {
+
+    }
+
+    @Override
+    public int getText() {
+        return mockData();
+    }
+
+    private int mockData() {
+        return 11;
+    }
 }

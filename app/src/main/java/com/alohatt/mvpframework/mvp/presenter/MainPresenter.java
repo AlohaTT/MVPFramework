@@ -3,6 +3,8 @@ package com.alohatt.mvpframework.mvp.presenter;
 import com.alohatt.library.mvp.BasePresenter;
 import com.alohatt.mvpframework.mvp.contract.MainContract;
 
+import javax.inject.Inject;
+
 /**
  * @ClassName MainPresenter
  * @Description TODO
@@ -12,7 +14,13 @@ import com.alohatt.mvpframework.mvp.contract.MainContract;
  */
 public class MainPresenter extends BasePresenter<MainContract.Model, MainContract.View> {
 
+    @Inject
     public MainPresenter(MainContract.Model model, MainContract.View view) {
         super(model, view);
+    }
+
+    public void getDataFromServer() {
+        int text = mModel.getText();
+        mView.setText(text);
     }
 }

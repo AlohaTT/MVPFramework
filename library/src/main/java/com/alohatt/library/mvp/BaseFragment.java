@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import com.alohatt.library.base.IFragment;
 import com.alohatt.library.base.IPresenter;
 
+import javax.inject.Inject;
+
 /**
  * @ClassName BaseFragment
  * @Description TODO
@@ -18,7 +20,9 @@ import com.alohatt.library.base.IPresenter;
  * @Date 2019-11-13 23:20
  * @Version 1.0
  */
-public abstract class BaseFragment<P extends IPresenter> extends Fragment implements IFragment<P> {
+public abstract class BaseFragment<P extends IPresenter> extends Fragment implements IFragment {
+    @Inject
+    @Nullable
     P mPresenter;
 
     @Nullable
@@ -37,7 +41,7 @@ public abstract class BaseFragment<P extends IPresenter> extends Fragment implem
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPresenter = setPresenter();
+        fragmentComponent();
     }
 
 }

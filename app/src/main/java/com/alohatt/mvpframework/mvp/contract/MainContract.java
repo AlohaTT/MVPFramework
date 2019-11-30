@@ -13,9 +13,11 @@ import com.alohatt.library.base.IView;
 public interface MainContract {
 
     interface View extends IView {
+        void setText(int data);
     }
 
     interface Model extends IModel {
+        int getText();
     }
 
 }

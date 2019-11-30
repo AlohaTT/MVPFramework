@@ -8,6 +8,11 @@ import android.view.InflateException;
 import com.alohatt.library.base.IActivity;
 import com.alohatt.library.base.IPresenter;
 
+import javax.inject.Inject;
+
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 /**
  * @ClassName BaseActivity
  * @Description TODO
@@ -15,8 +20,12 @@ import com.alohatt.library.base.IPresenter;
  * @Date 2019-11-13 23:06
  * @Version 1.0
  */
-public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivity implements IActivity<P> {
-    P mPresenter;
+public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivity implements IActivity {
+    @Inject
+    @Nullable
+    protected P mPresenter;
+
+    private Unbinder mUnbinder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,13 +34,27 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
         try {
             if (layoutId != 0) {
                 setContentView(layoutId);
+                mUnbinder = ButterKnife.bind(this);
             }
         } catch (Exception e) {
             if (e instanceof InflateException) throw e;
             e.printStackTrace();
         }
-        mPresenter = setPresenter();
+        activityComponent();
         initData(savedInstanceState);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mUnbinder != null && mUnbinder != Unbinder.EMPTY) {
+            mUnbinder.unbind();
+        }
+        this.mUnbinder = null;
+        if (mPresenter != null) {
+            mPresenter.onDestroy();
+        }
+        this.mPresenter = null;
     }
 
 }
